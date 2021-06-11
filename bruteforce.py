@@ -29,7 +29,8 @@ def get_binaire():
         table_binaire.append(binaire)
     return table_binaire
 
-def get_combinaisons(prix, nombre_de_combinaisons):
+def get_combinaisons(fichier, prix, nombre_de_combinaisons):
+    get_csv_to_dict(fichier)
     n = len(actions)
     combinaisons = []
     for k in get_binaire():
@@ -49,13 +50,12 @@ def get_combinaisons(prix, nombre_de_combinaisons):
         if prix_combi <= prix_max:
             combinaisons_valides.append(('Actions achetées: ' + str(action), 'Total investis: ' + str(prix_combi),
                                          'Total profit: ' + str(value)))
-    return sorted(combinaisons_valides, key=itemgetter(2), reverse=True)[:nombre_de_combinaisons]
+    return print(sorted(combinaisons_valides, key=itemgetter(2), reverse=True)[:nombre_de_combinaisons])
 
-def process(fichier):
-    get_csv_to_dict(fichier)
-    print(get_combinaisons(500, 1))
 
-process("data.csv")
+#get_combinaisons("data.csv", 500, 1)
+
+
 
 def get_brut():
     get_csv_to_dict("data.csv")
@@ -87,32 +87,10 @@ def get_brut():
 
 
 a = time.time()
+print(get_brut())
 #print(get_combinaisons(500, 1))
 b = time.time()
-#print(b-a)
+print(b-a)
 
-"""
-actions = [
-    (1, 20, 1.05),
-    (2, 30, 1.10),
-    (3, 50, 1.15),
-    (4, 70, 1.20),
-    (5, 60, 1.17),
-    (6, 80, 1.25),
-    (7, 22, 1.07),
-    (8, 26, 1.11),
-    (9, 48, 1.13),
-    (10, 34, 1.27),
-    (11, 42, 1.17),
-    (12, 110, 1.09),
-    (13, 38, 1.23),
-    (14, 14, 1.01),
-    (15, 18, 1.03),
-    (16, 8, 1.08),
-    (17, 4, 1.12),
-    (18, 10, 1.14),
-    (19, 24, 1.21),
-    (20, 114, 1.18),
-]
-"""
+
 
