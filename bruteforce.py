@@ -40,10 +40,8 @@ def get_combinaisons(prix, nombre_de_combinaisons):
     for combi in combinaisons:
         prix_combi = 0
         value = 0
-        name = 0
         action = []
         for l in range(n):
-            name += 1
             if combi[l] == '1':
                 prix_combi += actions[l][1]
                 value += get_value(actions[l][1], actions[l][2])
