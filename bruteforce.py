@@ -39,7 +39,6 @@ def get_combinaisons(fichier, prix):
         combins = '0' * (n - len(k)) + k
         combinaisons.append(combins)
     combinaisons_valides = []
-    a = time.time()
     for combi in combinaisons:
         prix_combi = 0
         value = 0
@@ -49,15 +48,10 @@ def get_combinaisons(fichier, prix):
                 prix_combi += actions[l][1]
                 value += get_value(actions[l][1], actions[l][2])
                 action.append(actions[l][0])
-        b = time.time()
         if prix_combi <= prix:
             combinaisons_valides.append(('Actions achetées: ' + str(action), 'Total investis: ' + str(prix_combi),
                                          'Total profit: ' + str(value)))
-    print(b - a)
     return print(sorted(combinaisons_valides, key=itemgetter(2), reverse=True)[0])
 
-
-
 get_combinaisons("data.csv", 500)
-
 

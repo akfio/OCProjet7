@@ -1,6 +1,4 @@
-from operator import itemgetter
 import pandas
-import time
 
 actions = []
 
@@ -18,34 +16,28 @@ def get_value(somme, benef):
     return ratio
 
 
-def get_opti(prix, fichier):
+def get_optimized(prix, fichier):
     get_csv_to_dict(fichier)
-    tableau = [[0 for w in range(prix)] for w in range(len(actions))]
-    for i in range(len(actions)):
-        for x in range(prix):
-            if actions[i][1] <= x:
-                tableau[i][x] = max(get_value(actions[i][1], actions[i][2]) + tableau[i - 1][x - actions[i][1]],
+    nb_actions = len(actions)
+    tableau = [[0 for w in range(prix + 1)] for w in range(nb_actions + 1)]
+    for i in range(1, nb_actions + 1):
+        for x in range(1, prix + 1):
+            if actions[i-1][1] <= x:
+                tableau[i][x] = max(get_value(actions[i-1][1], actions[i-1][2]) + tableau[i - 1][x - actions[i-1][1]],
                                     tableau[i - 1][x])
             else:
                 tableau[i][x] = tableau[i - 1][x]
-    w = prix
-    n = len(actions)
-    elements_selection = []
+    actions_name = []
+    total_price = 0
+    while prix >= 0 and nb_actions >= 0:
+        e = actions[nb_actions - 1]
+        if tableau[nb_actions][prix] == tableau[nb_actions - 1][prix - e[1]] + get_value(e[1], e[2]):
+            actions_name.append(e[0])
+            total_price += e[1]
+            prix -= e[1]
 
-    while w > 0 and n > 0:
-        e = actions[n - 1]
-        print(e)
-        if tableau[n][w] == tableau[n - 1][w - e[1]] + get_value(e[1], e[2]):
-            elements_selection.append(e)
-            w -= e[1]
+        nb_actions -= 1
+    return print('Actions achetées: ' + str(actions_name), '|| Profit: ' + str(tableau[-1][-1]), '|| Prix: ' + str(total_price))
 
-        n -= 1
-
-    return tableau[-1][-1], elements_selection
-
-print(get_opti(500, "data.csv"))
-
-
-
-# Retrouver les éléments en fonction de la somme
+get_optimized(500, "data.csv")
 
