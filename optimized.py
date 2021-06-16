@@ -37,7 +37,8 @@ def get_optimized(prix, fichier):
             prix -= e[1]
 
         nb_actions -= 1
-    return print('Actions achetées: ' + str(actions_name), '|| Profit: ' + str(tableau[-1][-1]), '|| Prix: ' + str(total_price))
+    return print('Actions achetées: ' + str(actions_name), '|| Profit: ' + str(tableau[-1][-1]),
+                 '|| Prix: ' + str(total_price))
 
 get_optimized(500, "data.csv")
 
