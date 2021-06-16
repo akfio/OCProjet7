@@ -1,5 +1,6 @@
 from operator import itemgetter
 import pandas
+import time
 
 actions = []
 
@@ -15,7 +16,6 @@ def get_value(somme, benef):
     capital = somme * pourcentage
     ratio = capital - somme
     return ratio
-    # return round(ratio, 2)
 
 
 def get_binaire():
@@ -31,15 +31,15 @@ def get_binaire():
     return table_binaire
 
 
-def get_combinaisons(fichier, prix, nombre_de_combinaisons):
+def get_combinaisons(fichier, prix):
     get_csv_to_dict(fichier)
     n = len(actions)
     combinaisons = []
     for k in get_binaire():
         combins = '0' * (n - len(k)) + k
         combinaisons.append(combins)
-    prix_max = prix
     combinaisons_valides = []
+    a = time.time()
     for combi in combinaisons:
         prix_combi = 0
         value = 0
@@ -49,10 +49,15 @@ def get_combinaisons(fichier, prix, nombre_de_combinaisons):
                 prix_combi += actions[l][1]
                 value += get_value(actions[l][1], actions[l][2])
                 action.append(actions[l][0])
-        if prix_combi <= prix_max:
+        b = time.time()
+        if prix_combi <= prix:
             combinaisons_valides.append(('Actions achetées: ' + str(action), 'Total investis: ' + str(prix_combi),
                                          'Total profit: ' + str(value)))
-    return print(sorted(combinaisons_valides, key=itemgetter(2), reverse=True)[:nombre_de_combinaisons])
+    print(b - a)
+    return print(sorted(combinaisons_valides, key=itemgetter(2), reverse=True)[0])
 
 
-get_combinaisons("data.csv", 500, 1)
+
+get_combinaisons("data.csv", 500)
+
+
