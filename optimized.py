@@ -6,7 +6,7 @@ actions = []
 def get_csv_to_dict(fichier):
     doc = pandas.read_csv(fichier)
     for i in range(len(doc)):
-        actions.append((doc["nom"][i], doc["prix"][i], doc["profit"][i]))
+        actions.append((doc["name"][i], doc["price"][i], doc["profit"][i]))
 
 
 def get_value(somme, benef):
@@ -22,9 +22,10 @@ def get_optimized(prix, fichier):
     tableau = [[0 for w in range(prix + 1)] for w in range(nb_actions + 1)]
     for i in range(1, nb_actions + 1):
         for x in range(1, prix + 1):
-            if actions[i-1][1] <= x:
-                tableau[i][x] = max(get_value(actions[i-1][1], actions[i-1][2]) + tableau[i - 1][x - actions[i-1][1]],
-                                    tableau[i - 1][x])
+            if actions[i - 1][1] <= x:
+                tableau[i][x] = max(
+                    get_value(actions[i - 1][1], actions[i - 1][2]) + tableau[i - 1][x - actions[i - 1][1]],
+                    tableau[i - 1][x])
             else:
                 tableau[i][x] = tableau[i - 1][x]
     actions_name = []
@@ -40,5 +41,5 @@ def get_optimized(prix, fichier):
     return print('Actions achetées: ' + str(actions_name), '|| Profit: ' + str(tableau[-1][-1]),
                  '|| Prix: ' + str(total_price))
 
-get_optimized(500, "data.csv")
 
+get_optimized(500, "data.csv")
