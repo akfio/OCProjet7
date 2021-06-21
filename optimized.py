@@ -1,9 +1,10 @@
 import pandas
+import time
 
 
 actions = []
 
-
+"""
 def get_csv_to_dict(fichier):
     doc = pandas.read_csv(fichier)
     for i in range(len(doc)):
@@ -47,9 +48,11 @@ def get_optimized(prix, fichier):
     return print('Actions achetées: ' + str(actions_name), '|| Profit: ' + str(tableau[-1][-1] / 100),
                  '|| Prix: ' + str(total_price / 100))
 
+a = time.time()
+get_optimized(500, "data.csv")
+b = time.time()
 
-get_optimized(500, "dataset1.csv")
-
+print(b - a)
 
 """
 def get_csv_to_dict(fichier):
@@ -92,6 +95,10 @@ def get_optimized(prix, fichier):
                  '|| Prix: ' + str(total_price))
 
 
+a = time.time()
 get_optimized(500, "data.csv")
-"""
+b = time.time()
+
+print(b - a)
+
 
