@@ -8,7 +8,7 @@ actions = []
 def get_csv_to_dict(fichier):
     doc = pandas.read_csv(fichier)
     for i in range(len(doc)):
-        actions.append((doc["nom"][i], doc["prix"][i], doc["profit"][i]))
+        actions.append((doc["name"][i], doc["price"][i], doc["profit"][i]))
 
 
 def get_value(somme, benef):
