@@ -53,5 +53,5 @@ def get_combinaisons(fichier, prix):
                                          'Total profit: ' + str(value)))
     return print(sorted(combinaisons_valides, key=itemgetter(2), reverse=True)[0])
 
-get_combinaisons("data.csv", 500)
+get_combinaisons("dataset1.csv", 500)
 
