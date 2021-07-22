@@ -54,10 +54,10 @@ class Optimized:
         max_profit = sac_a_dos[new_price]
 
         # la somme investit correspond au plus petit prix pour obtenir le profit maximal
-        prix = min(
+        invest = min(
             [j for j in range(new_price + 1) if sac_a_dos[j] == max_profit]
         )
-        total_price = prix / 100
+        total_price = invest / 100
 
         # boucler afin d'obtenir la combinaison correspondant au profit maximum
         # Lorsque la boucle passe sur le i minimum pour obtenir le profit maximum alors:
@@ -67,11 +67,11 @@ class Optimized:
         for i in range(number_of_actions, 0, -1):
             if max_profit <= 0:
                 break
-            if max_profit == tableau[i - 1][prix]:
+            if max_profit == tableau[i - 1][invest]:
                 continue
             (name, price, profit) = self.actions[i - 1]
             max_profit -= self.get_value(price, profit)
-            prix -= price
+            invest -= price
 
             self.actions_name.append(name)
 
@@ -81,7 +81,9 @@ class Optimized:
 
 run = Optimized()
 time_1 = time.time()
-run.get_optimized(500, "dataset1.csv")
+run.get_optimized(500, "dataset2.csv")
 time_2 = time.time()
 print(round(time_2 - time_1, 2), "secondes")
+
+
 

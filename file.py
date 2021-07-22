@@ -44,8 +44,7 @@ def calculate_and_print_knapsack(max_weight: int, items: [], results_file) -> No
         # Quit the loop when max profit is found
         # i.e. when the line from where the last knapsacks index between
         # min_weight and max_weight do not vary anymore
-        print(matrices[i][min_weight:])
-        print(matrices[i - 1][min_weight:])
+
         if matrices[i][min_weight:] == matrices[i - 1][min_weight:]:
             number_of_items = i
             break
